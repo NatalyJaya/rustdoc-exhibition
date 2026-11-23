@@ -35,7 +35,7 @@ transition: fade-out
 class: h1-gradient
 ---
 
-<div class="toc">
+<div class="toc toc-compact">
   <div class="toc-intro">
     <span class="toc-eyebrow">OVERVIEW</span>
     <h1>Contents</h1>
@@ -69,19 +69,33 @@ class: h1-gradient
     <li class="toc-item">
       <span class="toc-num">04</span>
       <div>
+        <h3>Under the hood</h3>
+        <p>Inputs, outputs, internals and Cargo.</p>
+      </div>
+    </li>
+    <li class="toc-item">
+      <span class="toc-num">05</span>
+      <div>
+        <h3>Open source</h3>
+        <p>License, community and real pull requests.</p>
+      </div>
+    </li>
+    <li class="toc-item">
+      <span class="toc-num">06</span>
+      <div>
         <h3>Inside <code>[function]()</code></h3>
         <p>How [input] becomes [output].</p>
       </div>
     </li>
     <li class="toc-item">
-      <span class="toc-num">05</span>
+      <span class="toc-num">07</span>
       <div>
         <h3>Study Conclusions</h3>
         <p>Key takeaways from the analysis.</p>
       </div>
     </li>
     <li class="toc-item">
-      <span class="toc-num">06</span>
+      <span class="toc-num">08</span>
       <div>
         <h3>Bibliography</h3>
         <p>References and further reading.</p>
@@ -428,6 +442,304 @@ class: h1-gradient
     </div>
   </div>
 </div>
+
+---
+layout: lava-cover
+transition: soft-rise | soft-fall
+class: h1-gradient
+---
+
+<div class="rd-feature">
+  <span class="rd-eyebrow">04 · UNDER THE HOOD</span>
+  <h1>What goes in, what comes out</h1>
+  <div class="rd-langs">
+    <span><carbon:code /> Written in Rust</span>
+    <span><carbon:document /> Documents Rust</span>
+    <span><carbon:text-annotation-toggle /> Comments in Markdown</span>
+  </div>
+  <div class="rd-io">
+    <div class="rd-io-col">
+      <span class="rd-io-k">INPUT</span>
+      <div v-click="1" class="rd-card rd-io-item">
+        <span class="rd-icon"><carbon:document /></span>
+        <div>
+          <h3><code>.rs</code> source files</h3>
+          <p>With <code>///</code> and <code>//!</code> doc comments.</p>
+        </div>
+      </div>
+      <div v-click="1" class="rd-card rd-io-item">
+        <span class="rd-icon"><carbon:catalog /></span>
+        <div>
+          <h3>Standalone <code>.md</code> files</h3>
+          <p>Guides or READMEs, rendered on their own.</p>
+        </div>
+      </div>
+    </div>
+    <div class="rd-io-mid">
+      <span class="rd-arrow"><carbon:arrow-right /></span>
+      <div class="rd-node rd-node-accent rd-io-core">
+        <span class="rd-icon"><carbon:settings /></span>
+        <h3>rustdoc</h3>
+      </div>
+      <span class="rd-arrow"><carbon:arrow-right /></span>
+    </div>
+    <div class="rd-io-col">
+      <span class="rd-io-k">OUTPUT</span>
+      <div v-click="2" class="rd-card rd-io-item">
+        <span class="rd-icon"><carbon:application-web /></span>
+        <div>
+          <h3>HTML + CSS + JS <span class="rd-badge is-stable">stable</span></h3>
+          <p>Browsable pages plus a <strong>search index</strong>.</p>
+        </div>
+      </div>
+      <div v-click="3" class="rd-card rd-io-item is-dashed">
+        <span class="rd-icon"><carbon:data-structured /></span>
+        <div>
+          <h3>JSON <span class="rd-badge is-nightly">nightly</span></h3>
+          <p><code>--output-format json</code>, unstable. Lets other tools read the docs.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+---
+layout: lava-cover
+transition: soft-rise | soft-fall
+class: h1-gradient
+---
+
+<div class="rd-split rd-split-pipe">
+  <div class="rd-intro">
+    <span class="rd-eyebrow">04 · UNDER THE HOOD</span>
+    <h1>Inside the <span class="rd-mono">rustdoc</span> box</h1>
+    <p class="rd-lead">
+      Five steps, following our <code class="rd-inline">mini_math::add</code> example.
+      Each one lives in its own part of <code class="rd-inline">src/librustdoc/</code>.
+    </p>
+  </div>
+  <ol class="rd-pipe">
+    <li v-click class="rd-pipe-step">
+      <span class="rd-pipe-n">1</span>
+      <div class="rd-pipe-txt">
+        <h3>The compiler reads the code</h3>
+        <p>rustc parses and type-checks it.</p>
+        <span class="rd-pipe-dir">core.rs</span>
+      </div>
+      <code class="rd-pipe-snip">pub fn add(a: i32, b: i32) -&gt; i32</code>
+    </li>
+    <li v-click class="rd-pipe-step">
+      <span class="rd-pipe-n">2</span>
+      <div class="rd-pipe-txt">
+        <h3>Comments become attributes</h3>
+        <p><code>///</code> is sugar for <code>#[doc]</code>.</p>
+        <span class="rd-pipe-dir">rustc parser</span>
+      </div>
+      <code class="rd-pipe-snip">#[doc = " Adds two numbers."]</code>
+    </li>
+    <li v-click class="rd-pipe-step">
+      <span class="rd-pipe-n">3</span>
+      <div class="rd-pipe-txt">
+        <h3>Stored in a clean structure</h3>
+        <p>Functions, types, traits and their docs.</p>
+        <span class="rd-pipe-dir">clean/</span>
+      </div>
+      <code class="rd-pipe-snip">clean::Item { name: add, kind: Function }</code>
+    </li>
+    <li v-click class="rd-pipe-step">
+      <span class="rd-pipe-n">4</span>
+      <div class="rd-pipe-txt">
+        <h3>Markdown → HTML + links</h3>
+        <p>Resolves <code>[Item]</code> links between items.</p>
+        <span class="rd-pipe-dir">passes/ · html/</span>
+      </div>
+      <code class="rd-pipe-snip">&lt;p&gt;Adds two numbers.&lt;/p&gt;</code>
+    </li>
+    <li v-click class="rd-pipe-step is-last">
+      <span class="rd-pipe-n">5</span>
+      <div class="rd-pipe-txt">
+        <h3>Doctests are compiled &amp; run</h3>
+        <p>Code blocks are extracted as tests.</p>
+        <span class="rd-pipe-dir">doctest/</span>
+      </div>
+      <code class="rd-pipe-snip">assert_eq!(add(2, 3), 5); <span class="rd-ok-l">✓</span></code>
+    </li>
+  </ol>
+</div>
+
+<!--
+This zooms into the middle box of the "Automatic generation" slide.
+-->
+
+---
+layout: lava-cover
+transition: fade-out
+class: h1-gradient
+---
+
+<div class="rd-feature">
+  <span class="rd-eyebrow">04 · UNDER THE HOOD</span>
+  <h1>Cargo: from your laptop to docs.rs</h1>
+  <p class="rd-lead rd-lead-center">
+    <code class="rd-inline">cargo doc</code> calls rustdoc with the right options. Nothing to configure.
+  </p>
+  <div class="rd-stages">
+    <div v-click class="rd-card rd-stage">
+      <div class="rd-card-top"><span class="rd-icon"><carbon:tools /></span><span class="rd-num">BUILD</span></div>
+      <div class="rd-cmds">
+        <p><span class="rd-term-prompt">$</span>cargo doc</p>
+        <p><span class="rd-term-prompt">$</span>cargo doc --open</p>
+        <p><span class="rd-term-prompt">$</span>cargo doc --no-deps</p>
+      </div>
+      <p>Documents your crate <strong>and its dependencies</strong>. <code>--open</code> opens the browser, <code>--no-deps</code> keeps only your project.</p>
+    </div>
+    <span v-click class="rd-arrow"><carbon:arrow-right /></span>
+    <div v-click class="rd-card rd-stage">
+      <div class="rd-card-top"><span class="rd-icon"><carbon:checkmark-outline /></span><span class="rd-num">TEST</span></div>
+      <div class="rd-cmds">
+        <p><span class="rd-term-prompt">$</span>cargo test</p>
+      </div>
+      <p>Runs the <strong>doctests</strong> along with your unit tests, so a broken example makes the tests fail.</p>
+    </div>
+    <span v-click class="rd-arrow"><carbon:arrow-right /></span>
+    <div v-click class="rd-card rd-stage rd-stage-accent">
+      <div class="rd-card-top"><span class="rd-icon"><carbon:launch /></span><span class="rd-num">PUBLISH</span></div>
+      <div class="rd-cmds">
+        <p><span class="rd-term-prompt">$</span>cargo publish</p>
+      </div>
+      <p>Once on <strong>crates.io</strong>, docs.rs builds and hosts the docs automatically.</p>
+    </div>
+  </div>
+</div>
+
+---
+layout: lava-cover
+transition: soft-rise | soft-fall
+class: h1-gradient
+---
+
+<div class="rd-split rd-split-wide">
+  <div class="rd-intro">
+    <span class="rd-eyebrow">05 · OPEN SOURCE</span>
+    <h1>Free to use, open to read</h1>
+    <p class="rd-lead">rustdoc is part of the Rust project, and so is its license.</p>
+  </div>
+  <div class="rd-stack">
+    <div v-click class="rd-card rd-license">
+      <span class="rd-icon"><carbon:certificate /></span>
+      <div>
+        <p class="rd-license-k">MIT <span>or</span> Apache-2.0</p>
+        <p>Dual license, your choice. Use, modify and distribute it freely, <strong>commercial projects included</strong>.</p>
+      </div>
+    </div>
+    <div v-click class="rd-tree">
+      <p class="rd-tree-root"><carbon:logo-github /> rust-lang/rust <span class="rd-tree-note">no repo of its own</span></p>
+      <p><span class="rd-tree-br">└─</span> src/librustdoc/</p>
+      <p><span class="rd-tree-br">&nbsp;&nbsp;&nbsp;├─</span> clean/ · passes/ · doctest/ · json/ <span class="rd-tree-note">the engine</span></p>
+      <p class="is-hl"><span class="rd-tree-br">&nbsp;&nbsp;&nbsp;└─</span> html/ <span class="rd-tree-note">the web interface</span></p>
+      <p><span class="rd-tree-br">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─</span> static/ <span class="rd-tree-note">css · js · fonts</span></p>
+      <p><span class="rd-tree-br">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─</span> templates/ <span class="rd-tree-note">page layouts</span></p>
+    </div>
+  </div>
+</div>
+
+---
+layout: lava-cover
+transition: soft-rise | soft-fall
+class: h1-gradient
+---
+
+<div class="rd-feature">
+  <span class="rd-eyebrow">05 · OPEN SOURCE</span>
+  <h1>How the community collaborates</h1>
+  <div class="rd-flow rd-flow-5">
+    <div v-click="1" class="rd-node rd-node-sm">
+      <span class="rd-icon"><carbon:idea /></span>
+      <h3>RFC</h3>
+      <p>Big changes are discussed in public first · rust-lang/rfcs</p>
+    </div>
+    <span v-click="2" class="rd-arrow"><carbon:arrow-right /></span>
+    <div v-click="2" class="rd-node rd-node-sm">
+      <span class="rd-icon"><carbon:warning-alt /></span>
+      <h3>Issue</h3>
+      <p>Labelled <code>T-rustdoc</code> so the right people see it</p>
+    </div>
+    <span v-click="3" class="rd-arrow"><carbon:arrow-right /></span>
+    <div v-click="3" class="rd-node rd-node-sm">
+      <span class="rd-icon"><carbon:pull-request /></span>
+      <h3>Pull request</h3>
+      <p>Anyone can open one on GitHub</p>
+    </div>
+    <span v-click="4" class="rd-arrow"><carbon:arrow-right /></span>
+    <div v-click="4" class="rd-node rd-node-sm rd-node-accent">
+      <span class="rd-icon"><carbon:user-multiple /></span>
+      <h3>Review</h3>
+      <p>The rustdoc team reviews and approves</p>
+    </div>
+  </div>
+  <div v-click="5" class="rd-channels">
+    <div>
+      <span class="rd-io-k">TALK</span>
+      <p><carbon:chat /> Zulip · <code>#t-rustdoc</code></p>
+      <p><carbon:forum /> users.rust-lang.org</p>
+    </div>
+    <div>
+      <span class="rd-io-k">GET STARTED</span>
+      <p><carbon:document /> CONTRIBUTING.md</p>
+      <p><carbon:book /> rustc dev guide · Code of Conduct</p>
+    </div>
+  </div>
+</div>
+
+---
+layout: lava-cover
+transition: fade-out
+class: h1-gradient
+---
+
+<div class="rd-prs">
+  <div class="rd-prs-head">
+    <div>
+      <span class="rd-eyebrow">05 · OPEN SOURCE</span>
+      <h1>Real pull requests</h1>
+    </div>
+    <p class="rd-lead">Four merged PRs in <code class="rd-inline">rust-lang/rust</code> behind features we've already seen.</p>
+  </div>
+  <div class="rd-pr-grid">
+    <a v-click class="rd-card rd-pr" href="https://github.com/rust-lang/rust/pull/74430" target="_blank" rel="noreferrer">
+      <div class="rd-pr-top"><span class="rd-merged"><carbon:pull-request /> Merged</span><span class="rd-pr-n">#74430</span></div>
+      <h3>Stabilize intra-doc links</h3>
+      <p>Made <code>[Item]</code> links stable, after a public final comment period.</p>
+      <div class="rd-pr-meta"><span>@Manishearth</span><span>Sep 2020</span><span class="rd-diff"><b>+107</b> <i>−69</i></span></div>
+      <div class="rd-pr-labels"><span>T-rustdoc</span><span>A-intra-doc-links</span><span>relnotes</span></div>
+    </a>
+    <a v-click class="rd-card rd-pr" href="https://github.com/rust-lang/rust/pull/79539" target="_blank" rel="noreferrer">
+      <div class="rd-pr-top"><span class="rd-merged"><carbon:pull-request /> Merged</span><span class="rd-pr-n">#79539</span></div>
+      <h3>Rustdoc: JSON backend experimental impl</h3>
+      <p>The first JSON output. It picked up unfinished work from #75114 by @P1n3appl3.</p>
+      <div class="rd-pr-meta"><span>@aDotInTheVoid</span><span>Dec 2020</span><span class="rd-diff"><b>+2192</b> <i>−21</i></span></div>
+      <div class="rd-pr-labels"><span>T-rustdoc</span><span>A-rustdoc-json</span></div>
+    </a>
+    <a v-click class="rd-card rd-pr" href="https://github.com/rust-lang/rust/pull/84176" target="_blank" rel="noreferrer">
+      <div class="rd-pr-top"><span class="rd-merged"><carbon:pull-request /> Merged</span><span class="rd-pr-n">#84176</span></div>
+      <h3>Generate links to definition in source pages</h3>
+      <p>Identifiers in the source code view become clickable links.</p>
+      <div class="rd-pr-meta"><span>@GuillaumeGomez</span><span>Aug 2021</span><span class="rd-diff"><b>+707</b> <i>−131</i></span></div>
+      <div class="rd-pr-labels"><span>T-rustdoc</span><span>A-rustdoc-ui</span></div>
+    </a>
+    <a v-click class="rd-card rd-pr" href="https://github.com/rust-lang/rust/pull/105848" target="_blank" rel="noreferrer">
+      <div class="rd-pr-top"><span class="rd-merged"><carbon:pull-request /> Merged</span><span class="rd-pr-n">#105848</span></div>
+      <h3>Add a new lint for broken inline code</h3>
+      <p><code>rustdoc::unescaped_backticks</code> warns about stray backticks in docs.</p>
+      <div class="rd-pr-meta"><span>@lukas-code</span><span>Apr 2023</span><span class="rd-diff"><b>+1775</b> <i>−5</i></span></div>
+      <div class="rd-pr-labels"><span>T-rustdoc</span><span>A-lints</span><span>relnotes</span></div>
+    </a>
+  </div>
+</div>
+
+<!--
+#74430 connects to "intra-doc links" in the timeline, #79539 to the JSON output, #84176 is by Guillaume Gomez from the timeline.
+-->
 
 ---
 layout: lava-cover
