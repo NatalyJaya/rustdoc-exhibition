@@ -1225,31 +1225,50 @@ class: h1-gradient
   <ol class="biblio-list">
     <li class="biblio-item">
       <p class="biblio-cite">
-        [Author 1]. ([Year]).
-        <em>[Title 1]</em>.
+        The Rust Project.
+        <em>What is rustdoc?</em>
+        The rustdoc book.
       </p>
-      <a class="biblio-url" href="https://example.com" target="_blank" rel="noreferrer">https://example.com</a>
+      <a class="biblio-url" href="https://doc.rust-lang.org/rustdoc/what-is-rustdoc.html" target="_blank" rel="noreferrer">https://doc.rust-lang.org/rustdoc/what-is-rustdoc.html</a>
     </li>
     <li class="biblio-item">
       <p class="biblio-cite">
-        [Author 2]. ([Year]).
-        <em>[Title 2]</em>.
+        The Rust Project.
+        <em>rust-lang/rust</em>
+        [GitHub repository].
       </p>
-      <a class="biblio-url" href="https://example.com" target="_blank" rel="noreferrer">https://example.com</a>
+      <a class="biblio-url" href="https://github.com/rust-lang/rust" target="_blank" rel="noreferrer">https://github.com/rust-lang/rust</a>
     </li>
     <li class="biblio-item">
       <p class="biblio-cite">
-        [Author 3]. ([Year]).
-        <em>[Title 3]</em>.
+        The Rust Project.
+        <em>src/librustdoc</em>
+        [Source code folder].
       </p>
-      <a class="biblio-url" href="https://example.com" target="_blank" rel="noreferrer">https://example.com</a>
+      <a class="biblio-url" href="https://github.com/rust-lang/rust/tree/main/src/librustdoc" target="_blank" rel="noreferrer">https://github.com/rust-lang/rust/tree/main/src/librustdoc</a>
     </li>
     <li class="biblio-item">
       <p class="biblio-cite">
-        [Author 4]. ([Year]).
-        <em>[Title 4]</em>.
+        Manishearth; aDotInTheVoid; GuillaumeGomez; lukas-code. (2020–2023).
+        <em>Merged rustdoc pull requests</em>
+        [GitHub pull requests].
       </p>
-      <a class="biblio-url" href="https://example.com" target="_blank" rel="noreferrer">https://example.com</a>
+      <span class="biblio-url"><a class="biblio-pr" href="https://github.com/rust-lang/rust/pull/74430" target="_blank" rel="noreferrer">#74430</a> · <a class="biblio-pr" href="https://github.com/rust-lang/rust/pull/79539" target="_blank" rel="noreferrer">#79539</a> · <a class="biblio-pr" href="https://github.com/rust-lang/rust/pull/84176" target="_blank" rel="noreferrer">#84176</a> · <a class="biblio-pr" href="https://github.com/rust-lang/rust/pull/105848" target="_blank" rel="noreferrer">#105848</a></span>
+    </li>
+    <li class="biblio-item">
+      <p class="biblio-cite">
+        DeepWiki.
+        <em>rust-lang/rust</em>
+        [AI-generated search results].
+      </p>
+      <a class="biblio-url" href="https://deepwiki.com/search/11d2f1a4-1eda-4f62-9560-2cb7fb1e51d3?mode=fast" target="_blank" rel="noreferrer">https://deepwiki.com/search/11d2f1a4-1eda-4f62-9560-2cb7fb1e51d3</a>
+    </li>
+    <li class="biblio-item">
+      <p class="biblio-cite">
+        The Rust Project.
+        <em>rustup: the Rust toolchain installer</em>.
+      </p>
+      <a class="biblio-url" href="https://rustup.rs" target="_blank" rel="noreferrer">https://rustup.rs</a>
     </li>
   </ol>
 </div>

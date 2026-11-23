@@ -960,3 +960,7 @@ code, pre {
 .slidev-layout .rd-icon-ok { background: rgba(46, 160, 67, 0.12); color: #2a7d3c; }
 .slidev-layout .rd-icon-ko { background: rgba(192, 57, 43, 0.1); color: #c0392b; }
 .slidev-layout .rd-card .rd-cmds p.rd-nowrap { white-space: nowrap; font-size: 9.5px; letter-spacing: -0.02em; }
+.slidev-layout .biblio .biblio-pr { color: var(--rd-accent, #3b4d68); text-decoration: none; }
+.slidev-layout .biblio .biblio-pr:hover { text-decoration: underline; }
+.slidev-layout .biblio a.biblio-url,
+.slidev-layout .biblio a.biblio-pr { border-bottom: 0; width: fit-content; }
