@@ -15,6 +15,8 @@ comark: true
 duration: 35min
 ---
 
+<img src="./components/assets/rustdoc-logo.svg" class="rd-cover-logo" alt="rustdoc logo" />
+
 # RustDoc
 
 Nataly Jaya
@@ -803,10 +805,8 @@ transition: zoom-in | zoom-out
 class: h1-gradient
 ---
 
-# [Hands on]
+# [Hands-on]
 ## Demo
-
-
 
 ---
 layout: lava-cover

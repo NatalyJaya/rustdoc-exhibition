@@ -964,3 +964,12 @@ code, pre {
 .slidev-layout .biblio .biblio-pr:hover { text-decoration: underline; }
 .slidev-layout .biblio a.biblio-url,
 .slidev-layout .biblio a.biblio-pr { border-bottom: 0; width: fit-content; }
+
+/* cover logo */
+.slidev-layout .rd-cover-logo {
+  display: block;
+  width: 112px;
+  height: 112px;
+  margin: 0 auto 18px;
+  filter: drop-shadow(0 10px 22px rgba(59, 77, 104, 0.18));
+}
