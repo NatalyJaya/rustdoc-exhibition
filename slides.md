@@ -83,19 +83,33 @@ class: h1-gradient
     <li class="toc-item">
       <span class="toc-num">06</span>
       <div>
-        <h3>Inside <code>[function]()</code></h3>
-        <p>How [input] becomes [output].</p>
+        <h3>Getting started</h3>
+        <p>Requirements, installing Rust, first docs.</p>
       </div>
     </li>
     <li class="toc-item">
       <span class="toc-num">07</span>
       <div>
-        <h3>Study Conclusions</h3>
-        <p>Key takeaways from the analysis.</p>
+        <h3>Inside <code>[function]()</code></h3>
+        <p>How [input] becomes [output].</p>
       </div>
     </li>
     <li class="toc-item">
       <span class="toc-num">08</span>
+      <div>
+        <h3>Comparison</h3>
+        <p>RustDoc vs. Javadoc vs. Doxygen.</p>
+      </div>
+    </li>
+    <li class="toc-item">
+      <span class="toc-num">09</span>
+      <div>
+        <h3>Conclusions</h3>
+        <p>Advantages, limitations and when to use it.</p>
+      </div>
+    </li>
+    <li class="toc-item">
+      <span class="toc-num">10</span>
       <div>
         <h3>Bibliography</h3>
         <p>References and further reading.</p>
@@ -743,6 +757,48 @@ class: h1-gradient
 
 ---
 layout: lava-cover
+transition: fade-out
+class: h1-gradient
+---
+
+<div class="rd-feature">
+  <span class="rd-eyebrow">06 · GETTING STARTED</span>
+  <h1>Up and running in three steps</h1>
+  <div class="rd-stages rd-stages-start">
+    <div v-click class="rd-card rd-stage">
+      <div class="rd-card-top"><span class="rd-icon"><carbon:list-checked /></span><span class="rd-num">01 · REQUIREMENTS</span></div>
+      <p>A terminal and a C linker:</p>
+      <ul class="rd-mini">
+        <li><b>macOS</b> Xcode command line tools</li>
+        <li><b>Windows</b> Visual Studio C++ build tools</li>
+        <li><b>Linux</b> gcc or clang</li>
+      </ul>
+    </div>
+    <span v-click class="rd-arrow"><carbon:arrow-right /></span>
+    <div v-click class="rd-card rd-stage">
+      <div class="rd-card-top"><span class="rd-icon"><carbon:download /></span><span class="rd-num">02 · INSTALL RUST</span></div>
+      <div class="rd-cmds">
+        <p class="rd-nowrap"><span class="rd-term-prompt">$</span>curl https://sh.rustup.rs -sSf | sh</p>
+        <p><span class="rd-term-prompt">$</span>rustdoc --version</p>
+      </div>
+      <p><strong>rustup</strong> installs rustc, cargo <strong>and rustdoc</strong>. Windows: rustup-init.exe.</p>
+    </div>
+    <span v-click class="rd-arrow"><carbon:arrow-right /></span>
+    <div v-click class="rd-card rd-stage rd-stage-accent">
+      <div class="rd-card-top"><span class="rd-icon"><carbon:play /></span><span class="rd-num">03 · USE IT</span></div>
+      <div class="rd-cmds">
+        <p><span class="rd-term-dim"># single file → ./doc</span></p>
+        <p><span class="rd-term-prompt">$</span>rustdoc src/lib.rs</p>
+        <p><span class="rd-term-dim"># cargo project → target/doc</span></p>
+        <p><span class="rd-term-prompt">$</span>cargo doc --open</p>
+      </div>
+      <p>In practice you'll almost always use <code>cargo doc</code>.</p>
+    </div>
+  </div>
+</div>
+
+---
+layout: lava-cover
 transition: zoom-in | zoom-out
 class: h1-gradient
 ---
@@ -1001,8 +1057,69 @@ transition: fade-out
 class: h1-gradient
 ---
 
+<div class="rd-cmp">
+  <span class="rd-eyebrow">08 · COMPARISON</span>
+  <h1>RustDoc vs. Javadoc vs. Doxygen</h1>
+  <table class="rd-table">
+    <thead>
+      <tr><th></th><th class="is-rd">RustDoc</th><th>Javadoc</th><th>Doxygen</th></tr>
+    </thead>
+    <tbody>
+      <tr><th>Languages</th><td class="is-rd">Rust</td><td>Java</td><td>C, C++, Java, Python…</td></tr>
+      <tr><th>Comment style</th><td class="is-rd"><code>///</code> + Markdown</td><td><code>/** */</code> + <code>@param</code> tags</td><td><code>/** */</code> + <code>\brief</code> commands</td></tr>
+      <tr><th>Ships with the toolchain</th><td class="is-rd"><span class="y">✓</span> rustup</td><td><span class="y">✓</span> JDK</td><td><span class="n">✗</span> separate install</td></tr>
+      <tr><th>Examples run as tests</th><td class="is-rd"><span class="y">✓</span> doctests</td><td><span class="n">✗</span></td><td><span class="n">✗</span></td></tr>
+      <tr><th>Output formats</th><td class="is-rd">HTML · JSON <em>(nightly)</em></td><td>HTML</td><td>HTML · PDF/LaTeX · XML · man</td></tr>
+      <tr><th>Diagrams</th><td class="is-rd"><span class="n">✗</span></td><td><span class="n">✗</span></td><td><span class="y">✓</span> class &amp; call graphs</td></tr>
+    </tbody>
+  </table>
+  <div v-click class="rd-verdict">
+    <p><span class="y">＋</span> RustDoc: zero setup, Markdown, examples that can't go stale.</p>
+    <p><span class="n">－</span> RustDoc: Rust only, HTML only, no diagrams. Doxygen wins on mixed-language projects.</p>
+  </div>
+</div>
+
+---
+layout: lava-cover
+transition: fade-out
+class: h1-gradient
+---
+
 # Study Conclusions
-## [Subtitle for the conclusions]
+## Advantages, limitations and when to use it
+
+---
+layout: lava-cover
+transition: fade-out
+class: h1-gradient
+---
+
+<div class="rd-feature">
+  <span class="rd-eyebrow">09 · CONCLUSIONS</span>
+  <h1>Verdict</h1>
+  <div class="rd-grid rd-grid-2">
+    <div v-click class="rd-card rd-card-col">
+      <div class="rd-card-top"><span class="rd-icon rd-icon-ok"><carbon:thumbs-up /></span><span class="rd-num">ADVANTAGES</span></div>
+      <p>Comes with Rust · docs always in sync thanks to doctests · Markdown · search and links for free · same look across all crates on docs.rs.</p>
+    </div>
+    <div v-click class="rd-card rd-card-col">
+      <div class="rd-card-top"><span class="rd-icon rd-icon-ko"><carbon:thumbs-down /></span><span class="rd-num">LIMITATIONS</span></div>
+      <p>Rust only · HTML only (JSON still unstable) · no diagrams or PDF · little room to change the layout.</p>
+    </div>
+    <div v-click class="rd-card rd-card-col">
+      <div class="rd-card-top"><span class="rd-icon"><carbon:face-satisfied /></span><span class="rd-num">EASE OF USE</span></div>
+      <p>Very low barrier: if you can write Markdown, you can write rustdoc. One command, <code>cargo doc</code>, nothing to configure.</p>
+    </div>
+    <div v-click class="rd-card rd-card-col rd-stage-accent">
+      <div class="rd-card-top"><span class="rd-icon"><carbon:recommend /></span><span class="rd-num">I'D RECOMMEND IT FOR</span></div>
+      <p>Any Rust library, especially one published on crates.io · team projects where docs must stay up to date · learning, since examples double as tests. For long guides, pair it with <strong>mdBook</strong>.</p>
+    </div>
+  </div>
+</div>
+
+<!--
+Add your personal experience here: what surprised you, what was hard, how long it took to get your first docs.
+-->
 
 ---
 layout: lava-cover
