@@ -233,7 +233,7 @@ code, pre {
 
 
 .slidev-page::after {
-  content: attr(data-slidev-no) " / 35";
+  content: attr(data-slidev-no) " / 22";
   position: absolute;
   left: 28px;
   bottom: 20px;

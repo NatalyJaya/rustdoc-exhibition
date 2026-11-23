@@ -92,26 +92,19 @@ class: h1-gradient
     <li class="toc-item">
       <span class="toc-num">07</span>
       <div>
-        <h3>Inside <code>[function]()</code></h3>
-        <p>How [input] becomes [output].</p>
+        <h3>Hands-on</h3>
+        <p>Live demo: rustdoc in action.</p>
       </div>
     </li>
     <li class="toc-item">
       <span class="toc-num">08</span>
-      <div>
-        <h3>Comparison</h3>
-        <p>RustDoc vs. Javadoc vs. Doxygen.</p>
-      </div>
-    </li>
-    <li class="toc-item">
-      <span class="toc-num">09</span>
       <div>
         <h3>Conclusions</h3>
         <p>Advantages, limitations and when to use it.</p>
       </div>
     </li>
     <li class="toc-item">
-      <span class="toc-num">10</span>
+      <span class="toc-num">09</span>
       <div>
         <h3>Bibliography</h3>
         <p>References and further reading.</p>
@@ -824,7 +817,7 @@ class: h1-gradient
 ---
 
 <div class="rd-feature">
-  <span class="rd-eyebrow">09 · CONCLUSIONS</span>
+  <span class="rd-eyebrow">08 · CONCLUSIONS</span>
   <h1>Verdict</h1>
   <div class="rd-grid rd-grid-2">
     <div v-click class="rd-card rd-card-col">
